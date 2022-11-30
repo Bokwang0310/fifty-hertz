@@ -9,6 +9,7 @@
 - 배경 사진
 
 [YT Iframe API](https://developers.google.com/youtube/iframe_api_reference?hl=ko)
+[Lyric Font](https://fonts.google.com/specimen/Nanum+Myeongjo?query=Nanum)
 
 틀린 질문
 
