@@ -1,17 +1,17 @@
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 
-import Image from "../assets/imgs/wrong-question.jpg";
+// import Image from "../assets/imgs/wrong-question.jpg";
 import lyricObj from "../assets/lyrics.json";
 
 const Container = styled(Paper)(() => ({
   display: "flex",
-  backgroundImage: `url(${Image})`,
+  // backgroundImage: `url(${Image})`,
+  background: ["#7D7D7D", "linear-gradient(45deg, #7D7D7D, #CDCDCD)"],
   height: "100vh",
   backgroundSize: "cover",
   alignItems: "center",
   justifyContent: "center",
-  // justifyContent: "space-between",
   flexDirection: "column",
   // filter: "brightness(30%)",
 }));
@@ -30,7 +30,6 @@ const LyricContainer = styled("div")(() => ({
   "&::-webkit-scrollbar-track": {
     backgroundColor: "grey",
     borderRadius: "3px",
-    // boxShadow: "inset 0px 0px 5px white",
   },
 }));
 
