@@ -1,12 +1,12 @@
 import CssBaseline from "@mui/material/CssBaseline";
 
-import WrongQuestion from "./components/Wrong-Question";
+import Music from "./components/Music";
 
 function App() {
   return (
     <>
       <CssBaseline />
-      <WrongQuestion />
+      <Music />
     </>
   );
 }
