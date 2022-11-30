@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <Music />
+      <Music musicName="powder-blue" />
     </>
   );
 }

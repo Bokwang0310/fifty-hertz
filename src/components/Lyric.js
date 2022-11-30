@@ -1,5 +1,4 @@
 import { styled } from "@mui/material/styles";
-import lyricObj from "../assets/lyrics.json";
 
 const LyricContainer = styled("div")(() => ({
   width: "560px",
@@ -19,14 +18,14 @@ const LyricContainer = styled("div")(() => ({
   },
 }));
 
-function Lyric() {
-  const lyricList = lyricObj["wrong-question"].split("\n");
+function Lyric({ lyric }) {
+  const lyricList = lyric.split("\n");
 
   return (
     <LyricContainer>
-      {lyricList.map((lyric, i) => (
+      {lyricList.map((sentence, i) => (
         <p key={i} style={{ textAlign: "center" }}>
-          {lyric}
+          {sentence}
         </p>
       ))}
     </LyricContainer>

@@ -1,6 +1,7 @@
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 
+import information from "../assets/information.json";
 // import Image from "../assets/imgs/wrong-question.jpg";
 import Player from "./Player";
 import Lyric from "./Lyric";
@@ -17,11 +18,12 @@ const Container = styled(Paper)(() => ({
   // filter: "brightness(30%)",
 }));
 
-function Music() {
+function Music({ musicName }) {
+  const currentMusic = information[musicName];
   return (
     <Container>
-      <Player link="bi3lPMmK7Vk" />
-      <Lyric />
+      <Player link={currentMusic.link} />
+      <Lyric lyric={currentMusic.lyric} />
     </Container>
   );
 }
