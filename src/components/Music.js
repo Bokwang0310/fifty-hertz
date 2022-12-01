@@ -6,10 +6,16 @@ import info from "../assets/info.json";
 import Player from "./Player";
 import Lyric from "./Lyric";
 
-const Container = styled(Paper)(() => ({
+const Container = styled(Paper, {
+  shouldForwardProp: (propName) =>
+    propName !== "firstColor" && propName !== "secondColor",
+})(({ firstColor, secondColor }) => ({
   display: "flex",
   // backgroundImage: `url(${Image})`,
-  background: ["#7D7D7D", "linear-gradient(45deg, #7D7D7D, #CDCDCD)"],
+  background: [
+    firstColor,
+    `linear-gradient(45deg, ${firstColor}, ${secondColor})`,
+  ],
   height: "100vh",
   backgroundSize: "cover",
   flexDirection: "column",
@@ -20,8 +26,9 @@ const Container = styled(Paper)(() => ({
 
 function Music({ musicName }) {
   const currentMusic = info[musicName];
+  const [firstColor, secondColor] = currentMusic.themeColor;
   return (
-    <Container>
+    <Container firstColor={firstColor} secondColor={secondColor}>
       <Player link={currentMusic.link} />
       <Lyric lyric={currentMusic.lyric} />
     </Container>
