@@ -20,8 +20,16 @@ player.getCurrentTime(); -> 현재 재생 시각 제공하는 yt API
 
 ```json
 {
-  "musicName1": { "link": "11md9a", "lyric": " ... " },
-  "musicName2": { "link": "aldk91m", "lyric": " ... " }
+  "musicName1": {
+    "link": "11md9a",
+    "lyric": " ... ",
+    "themeColor": ["#000000", "#ffffff"]
+  },
+  "musicName2": {
+    "link": "aldk91m",
+    "lyric": " ... ",
+    "themeColor": ["#ffffff", "#000000"]
+  }
 }
 ```
 
@@ -29,7 +37,11 @@ player.getCurrentTime(); -> 현재 재생 시각 제공하는 yt API
 
 띄어쓰기는 대쉬로, 모두 소문자, 최대한 영어를 사용하되 영어 부제 조차 없는 경우는 한국어로
 
-**Memo**
+**What I learned**
+
+[lesson.md](./lesson.md)
+
+**메모**
 
 [YT Iframe API](https://developers.google.com/youtube/iframe_api_reference?hl=ko)
 

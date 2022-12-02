@@ -25,9 +25,12 @@ const Container = styled(Paper, {
   // filter: "brightness(30%)",
 }));
 
+const getMusic = (musicName) => (musicName ? musicName : "wrong-question");
+
 function Music() {
   const { music } = useParams();
-  const currentMusic = info[music];
+
+  const currentMusic = info[getMusic(music)];
   const [firstColor, secondColor] = currentMusic.themeColor;
   return (
     <Container firstColor={firstColor} secondColor={secondColor}>
