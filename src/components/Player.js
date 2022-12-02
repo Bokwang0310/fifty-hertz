@@ -1,14 +1,25 @@
+import ReactPlayer from "react-player";
+
 function Player({ link }) {
+  const config = {
+    youtube: {
+      playerVars: {
+        autoplay: 1,
+        rel: 0,
+        modestbranding: 1,
+        fs: 0,
+      },
+      embedOptions: {
+        // width: "560",
+        // height: "315",
+      },
+    },
+  };
+
   return (
-    <iframe
-      width="560"
-      height="315"
-      src={`https://www.youtube.com/embed/${link}`}
-      title="YouTube video player"
-      frameBorder="0"
-      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
-      allowFullScreen
-      style={{ marginBottom: "10px" }}
+    <ReactPlayer
+      url={`https://www.youtube.com/embed/${link}`}
+      config={config}
     />
   );
 }

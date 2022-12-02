@@ -23,6 +23,7 @@ const Container = styled(Paper, {
   alignItems: "center",
   justifyContent: "center",
   // filter: "brightness(30%)",
+  borderRadius: "0px",
 }));
 
 const getMusic = (musicName) => (musicName ? musicName : "wrong-question");
