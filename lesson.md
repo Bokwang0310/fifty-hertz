@@ -92,3 +92,9 @@ function Comp() {
 **추가**
 
 이유는 모르겠지만 `styled()`에 첫번째 인자로 `"div"`를 넣으면 어떤 prop을 쓰던 경고가 발생하지 않지만 `Paper`와 같이 컴포넌트를 직접 함수의 입력값으로 이용하는 경우 문제가 생긴다.
+
+# React.StrictMode
+
+StrictMode 쓰면 렌더링 두 번 된다.
+
+# 다음 주제

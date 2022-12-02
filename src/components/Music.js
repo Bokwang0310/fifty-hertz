@@ -1,5 +1,6 @@
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
+import { useParams } from "react-router-dom";
 
 import info from "../assets/info.json";
 // import Image from "../assets/imgs/wrong-question.jpg";
@@ -24,8 +25,9 @@ const Container = styled(Paper, {
   // filter: "brightness(30%)",
 }));
 
-function Music({ musicName }) {
-  const currentMusic = info[musicName];
+function Music() {
+  const { music } = useParams();
+  const currentMusic = info[music];
   const [firstColor, secondColor] = currentMusic.themeColor;
   return (
     <Container firstColor={firstColor} secondColor={secondColor}>
