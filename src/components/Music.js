@@ -36,7 +36,7 @@ function Music() {
   return (
     <Container firstColor={firstColor} secondColor={secondColor}>
       <Player link={currentMusic.link} />
-      <Lyric lyric={currentMusic.lyric} />
+      <Lyric lyric={currentMusic.lyric} textColor={currentMusic.textColor} />
     </Container>
   );
 }

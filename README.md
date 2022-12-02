@@ -10,6 +10,8 @@ player.getCurrentTime(); -> 현재 재생 시각 제공하는 yt API
 
 속성 상속이 문제가 아니었다... 그냥 덮여버림
 
+[틀린 질문](https://images.unsplash.com/photo-1604604178488-03a6e925991e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1187&q=80)
+
 **TODO**
 
 - 플레이어랑 가사 사이에 공백 주기 위해 각자 마진을 주고 있는데 좀 더 좋게 바꿔야

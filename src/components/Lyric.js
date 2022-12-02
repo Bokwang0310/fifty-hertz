@@ -1,6 +1,9 @@
 import { styled } from "@mui/material/styles";
 
-const LyricContainer = styled("div")(() => ({
+const LyricContainer = styled("div", {
+  shouldForwardProp: (propName) => propName !== "textColor",
+})(({ textColor }) => ({
+  color: textColor,
   width: "560px",
   height: "30vh",
   marginTop: "10px",
@@ -18,11 +21,11 @@ const LyricContainer = styled("div")(() => ({
   },
 }));
 
-function Lyric({ lyric }) {
+function Lyric({ lyric, textColor }) {
   const lyricList = lyric.split("\n");
 
   return (
-    <LyricContainer>
+    <LyricContainer textColor={textColor}>
       {lyricList.map((sentence, i) => (
         <p key={i} style={{ textAlign: "center" }}>
           {sentence}
