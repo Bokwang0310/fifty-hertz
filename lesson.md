@@ -97,4 +97,17 @@ function Comp() {
 
 StrictMode 쓰면 렌더링 두 번 된다.
 
-# 다음 주제
+# autoplay in chrome browser
+
+크롬 브라우저에서는 보안 상의 이유로 소리 있는 영상의 자동 재생을 허용하지 않는다. 크롬 자동 재생 정책은 다음과 같다.
+
+- Muted autoplay is always allowed.
+- Autoplay with sound is allowed if:
+  - The user has interacted with the domain (click, tap, etc.).
+  - On desktop, the user's Media Engagement Index threshold has been crossed, meaning the user has previously played video with sound.
+  - The user has added the site to their home screen on mobile or installed the PWA on desktop.
+- Top frames can delegate autoplay permission to their iframes to allow autoplay with sound.
+
+영상을 음소거 시킬 수는 없고..
+
+생각해 본 결과, 재생 페이지로 들어가기 전에 어차피 사용자의 상호작용이 필요한 거니까 특정 음악 페이지로 가기 전에 사용자의 상호작용을 받는 방법으로 해봐야 겠다.

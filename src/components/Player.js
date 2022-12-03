@@ -1,18 +1,13 @@
-import ReactPlayer from "react-player";
+import ReactPlayer from "react-player/youtube";
 
 function Player({ link }) {
   const config = {
-    youtube: {
-      playerVars: {
-        autoplay: 1,
-        rel: 0,
-        modestbranding: 1,
-        fs: 0,
-      },
-      embedOptions: {
-        // width: "560",
-        // height: "315",
-      },
+    playerVars: {
+      // controls: 1,
+      autoplay: 1,
+      rel: 0,
+      modestbranding: 1,
+      fs: 0,
     },
   };
 
@@ -20,6 +15,10 @@ function Player({ link }) {
     <ReactPlayer
       url={`https://www.youtube.com/embed/${link}`}
       config={config}
+      playing={true}
+      width={"560px"}
+      height={"315px"}
+      // controls={true}
     />
   );
 }

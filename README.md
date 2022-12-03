@@ -17,6 +17,8 @@ player.getCurrentTime(); -> 현재 재생 시각 제공하는 yt API
 - 플레이어랑 가사 사이에 공백 주기 위해 각자 마진을 주고 있는데 좀 더 좋게 바꿔야
 - 플레이어 안 보여도 상관 없으니까 가사 박스 세로 제한 없애고 페이지를 내릴 수 있게 하자
 - json에 `backgroundImg`, `comment` 추가
+- `/` 핸들링
+- 유튜브 컨트롤을 표시하려고 하면 발생하는 에러 해결
 
 **JSON 구조**
 
@@ -25,12 +27,14 @@ player.getCurrentTime(); -> 현재 재생 시각 제공하는 yt API
   "musicName1": {
     "link": "11md9a",
     "lyric": " ... ",
-    "themeColor": ["#000000", "#ffffff"]
+    "themeColor": ["#000000", "#ffffff"],
+    "textColor": "black"
   },
   "musicName2": {
     "link": "aldk91m",
     "lyric": " ... ",
-    "themeColor": ["#ffffff", "#000000"]
+    "themeColor": ["#ffffff", "#000000"],
+    "textColor": "white"
   }
 }
 ```
