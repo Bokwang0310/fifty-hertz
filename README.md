@@ -19,6 +19,7 @@ player.getCurrentTime(); -> 현재 재생 시각 제공하는 yt API
 - json에 `backgroundImg`, `comment` 추가
 - `/` 핸들링
 - 유튜브 컨트롤을 표시하려고 하면 발생하는 에러 해결
+- lrc 만드는 페이지 제작
 
 **JSON 구조**
 
