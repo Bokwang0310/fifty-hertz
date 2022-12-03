@@ -1,6 +1,7 @@
+import { useRef } from "react";
+import { useParams } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
-import { useParams } from "react-router-dom";
 
 import info from "../assets/info.json";
 // import Image from "../assets/imgs/wrong-question.jpg";
@@ -30,12 +31,15 @@ const getMusic = (musicName) => (musicName ? musicName : "wrong-question");
 
 function Music() {
   const { music } = useParams();
+  const player = useRef(null);
+
+  const getCurrentTime = player.current.getCurrentTime();
 
   const currentMusic = info[getMusic(music)];
   const [firstColor, secondColor] = currentMusic.themeColor;
   return (
     <Container firstColor={firstColor} secondColor={secondColor}>
-      <Player link={currentMusic.link} />
+      <Player link={currentMusic.link} player={player} />
       <Lyric lyric={currentMusic.lyric} textColor={currentMusic.textColor} />
     </Container>
   );

@@ -25,13 +25,13 @@ player.getCurrentTime(); -> 현재 재생 시각 제공하는 yt API
 ```json
 {
   "musicName1": {
-    "link": "11md9a",
+    "link": "1a2b3c",
     "lyric": " ... ",
     "themeColor": ["#000000", "#ffffff"],
     "textColor": "black"
   },
   "musicName2": {
-    "link": "aldk91m",
+    "link": "3c2b1a",
     "lyric": " ... ",
     "themeColor": ["#ffffff", "#000000"],
     "textColor": "white"
