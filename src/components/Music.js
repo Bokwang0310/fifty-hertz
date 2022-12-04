@@ -4,16 +4,16 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 
 import info from "../assets/info.json";
-// import Image from "../assets/imgs/wrong-question.jpg";
+import lrcLyricObj from "../assets/lyrics/lyric.json";
 import Player from "./Player";
 import Lyric from "./Lyric";
+import LrcLyric from "./LrcLyric";
 
 const Container = styled(Paper, {
   shouldForwardProp: (propName) =>
     propName !== "firstColor" && propName !== "secondColor",
 })(({ firstColor, secondColor }) => ({
   display: "flex",
-  // backgroundImage: `url(${Image})`,
   background: [
     firstColor,
     `linear-gradient(45deg, ${firstColor}, ${secondColor})`,
@@ -23,24 +23,29 @@ const Container = styled(Paper, {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  // filter: "brightness(30%)",
   borderRadius: "0px",
 }));
 
 const getMusic = (musicName) => (musicName ? musicName : "wrong-question");
 
 function Music() {
-  const { music } = useParams();
+  const { music } = useParams().music;
   const player = useRef(null);
 
-  const getCurrentTime = player.current.getCurrentTime();
+  // const getCurrentTime = player.current.getCurrentTime();
 
   const currentMusic = info[getMusic(music)];
   const [firstColor, secondColor] = currentMusic.themeColor;
+  const lrcLyric = lrcLyricObj[getMusic(music)];
+
   return (
     <Container firstColor={firstColor} secondColor={secondColor}>
       <Player link={currentMusic.link} player={player} />
-      <Lyric lyric={currentMusic.lyric} textColor={currentMusic.textColor} />
+      {lrcLyric ? (
+        <LrcLyric lrcLyric={lrcLyric} textColor={currentMusic.textColor} />
+      ) : (
+        <Lyric lyric={currentMusic.lyric} textColor={currentMusic.textColor} />
+      )}
     </Container>
   );
 }

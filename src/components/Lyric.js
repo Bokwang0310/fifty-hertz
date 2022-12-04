@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 
-const LyricContainer = styled("div", {
+export const LyricContainer = styled("div", {
   shouldForwardProp: (propName) => propName !== "textColor",
 })(({ textColor }) => ({
   color: textColor,
