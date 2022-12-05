@@ -22,6 +22,7 @@ player.getCurrentTime(); -> 현재 재생 시각 제공하는 yt API
 - lrc 만드는 페이지 제작
 - `Music` 컴포넌트 내부 완전 더러움 -> 변수 이름 고민 필요
 - lrc 파일 그 자체로 쓰는 방법으로 바꾸기
+- `Generator.js` 반복 줄이기
 
 **JSON 구조**
 

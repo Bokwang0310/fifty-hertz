@@ -1,6 +1,6 @@
 import ReactPlayer from "react-player/youtube";
 
-function Player({ link, player }) {
+function Player({ link, player = null }) {
   const config = {
     playerVars: {
       // controls: 1,
