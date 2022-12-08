@@ -1,11 +1,5 @@
 # 50Hz
 
-**싱크가사**
-
-LRC를 일단 만들면 하이라이팅 해주는 라이브러리 있으면 쓰고 없으면 만들고
-
-player.getCurrentTime(); -> 현재 재생 시각 제공하는 yt API
-
 **배경 사진**
 
 속성 상속이 문제가 아니었다... 그냥 덮여버림
@@ -16,13 +10,14 @@ player.getCurrentTime(); -> 현재 재생 시각 제공하는 yt API
 
 - 플레이어랑 가사 사이에 공백 주기 위해 각자 마진을 주고 있는데 좀 더 좋게 바꿔야
 - 플레이어 안 보여도 상관 없으니까 가사 박스 세로 제한 없애고 페이지를 내릴 수 있게 하자
-- json에 `backgroundImg`, `comment` 추가
+- json에 `backgroundImg`, `comment`, `activeColor` 추가
 - `/` 핸들링
 - 유튜브 컨트롤을 표시하려고 하면 발생하는 에러 해결
 - lrc 만드는 페이지 제작
 - `Music` 컴포넌트 내부 완전 더러움 -> 변수 이름 고민 필요
 - lrc 파일 그 자체로 쓰는 방법으로 바꾸기
-- `Generator.js` 에서 `Music.js` 재사용하기
+- `Generator.js`에서 `Music.js` 재사용하기
+- `LrcLyric`에 p 태그 스타일링 emotion으로 바꾸기 -> 그냥 styled p 를 만들자
 
 **JSON 구조**
 

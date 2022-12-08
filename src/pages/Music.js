@@ -1,9 +1,8 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import info from "../assets/info.json";
 import lrcLyricObj from "../assets/lyrics/lyric.json";
-
-import { usePlayerRef } from "../hooks/usePlayerRef";
 
 import Background from "../components/Background";
 import Player from "../components/Player";
@@ -14,7 +13,7 @@ const getMusic = (musicName) => musicName || "wrong-question";
 
 function Music() {
   const { musicName } = useParams();
-  const [playerRef, setPlayerRef] = usePlayerRef();
+  const [player, setPlayer] = useState(null);
 
   const currentMusic = info[getMusic(musicName)];
   const [firstColor, secondColor] = currentMusic.themeColor;
@@ -22,20 +21,16 @@ function Music() {
 
   return (
     <Background firstColor={firstColor} secondColor={secondColor}>
-      <Player link={currentMusic.link} setRef={setPlayerRef} />
-      {lrcLyric ? (
-        <LrcLyric lrcLyric={lrcLyric} textColor={currentMusic.textColor} />
+      <Player link={currentMusic.link} setRef={setPlayer} />
+      {lrcLyric && player ? (
+        <LrcLyric
+          lrcLyric={lrcLyric}
+          textColor={currentMusic.textColor}
+          getCurrentTime={player.getCurrentTime}
+        />
       ) : (
         <Lyric lyric={currentMusic.lyric} textColor={currentMusic.textColor} />
       )}
-      <button
-        onClick={() => {
-          if (playerRef !== null)
-            console.log(playerRef.current.getCurrentTime());
-        }}
-      >
-        btn
-      </button>
     </Background>
   );
 }
