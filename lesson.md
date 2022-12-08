@@ -112,8 +112,18 @@ StrictMode 쓰면 렌더링 두 번 된다.
 
 생각해 보니까, 재생 페이지로 들어가기 전에 어차피 사용자 상호작용이 필요하니 빨리 초기 페이지를 만들자
 
-# many sides of ref in react
+# ref to manage variables
 
 react의 ref는 DOM을 선택하는 용도 외에도 어떤 컴포넌트의 변수로써 활용할 수 있다. state는 값이 변경될 때 마다 컴포넌트를 리렌더링 시키고, 컴포넌트 내에 변수를 직접 선언하면 변수가 계속 초기화 되기 때문에 이 두 가지를 원치 않는 값을 저장할 때 `ref`를 사용할 수 있다.
 
 [관련 공식 문서](https://reactjs.org/docs/hooks-faq.html#is-there-something-like-instance-variables)
+
+# ref with React.useCallback()
+
+일반적으로 `React.useRef`를 사용하면 DOM에 ref를 attach/detach 할 때 컴포넌트가 그것을 인지하지 못한다. 그래서 ref를 attach/detach 할 때 어떤 함수를 실행시키고 싶다면 `React.useCallback`을 사용할 수 있다고 한다.
+
+[관련 공식 문서](https://reactjs.org/docs/hooks-faq.html#how-can-i-measure-a-dom-node)
+
+그런데, 사실 `useCallback`보다는 함수를 전달한다는 개념이 더 핵심적인 내용 같다. 실제로 `useCallback`으로 감싸지 않고 컴포넌트의 `ref` 속성에 함수를 넘겨도 원하는 작업을 할 수 있다. 그런데 왜 굳이 `useCallback`으로 감싸는걸까. 단순히 최적화 문제?
+
+공식 문서의 예시에서는 콜백 함수가 state에 관여하기 때문에 `useCallback`을 쓴 것 같다. 내 상황에서는 Music 컴포넌트가 state를 가지지도 않고 react-player 인스턴스를 `useRef`에 저장하고 있기 때문에 `useCallback` 없이 그냥 함수를 넘겨도 상관 없을 것 같지만 그냥 썼다.

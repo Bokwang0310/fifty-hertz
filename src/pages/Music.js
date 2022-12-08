@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useCallback } from "react";
 import { useParams } from "react-router-dom";
 
 import info from "../assets/info.json";
@@ -9,13 +9,17 @@ import Player from "../components/Player";
 import Lyric from "../components/Lyric";
 import LrcLyric from "../components/LrcLyric";
 
-const getMusic = (musicName) => (musicName ? musicName : "wrong-question");
+const getMusic = (musicName) => musicName || "wrong-question";
 
 function Music() {
   const { musicName } = useParams();
-  const player = useRef(null);
-
-  // const getCurrentTime = player.current.getCurrentTime();
+  // TODO: 훅으로 분리
+  const playerRef = useRef(null);
+  const setPlayerRef = useCallback((player) => {
+    if (player !== null) {
+      playerRef.current = player;
+    }
+  }, []);
 
   const currentMusic = info[getMusic(musicName)];
   const [firstColor, secondColor] = currentMusic.themeColor;
@@ -23,12 +27,20 @@ function Music() {
 
   return (
     <Background firstColor={firstColor} secondColor={secondColor}>
-      <Player link={currentMusic.link} player={player} />
+      <Player link={currentMusic.link} player={setPlayerRef} />
       {lrcLyric ? (
         <LrcLyric lrcLyric={lrcLyric} textColor={currentMusic.textColor} />
       ) : (
         <Lyric lyric={currentMusic.lyric} textColor={currentMusic.textColor} />
       )}
+      <button
+        onClick={() => {
+          if (playerRef !== null)
+            console.log(playerRef.current.getCurrentTime());
+        }}
+      >
+        btn
+      </button>
     </Background>
   );
 }
