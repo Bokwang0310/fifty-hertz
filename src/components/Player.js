@@ -1,6 +1,6 @@
 import ReactPlayer from "react-player/youtube";
 
-function Player({ link, player }) {
+function Player({ link, setRef }) {
   const config = {
     playerVars: {
       // controls: 1,
@@ -19,7 +19,7 @@ function Player({ link, player }) {
       width={"560px"}
       height={"315px"}
       // controls={true}
-      ref={player}
+      ref={setRef}
     />
   );
 }

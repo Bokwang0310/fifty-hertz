@@ -1,8 +1,9 @@
-import { useRef, useCallback } from "react";
 import { useParams } from "react-router-dom";
 
 import info from "../assets/info.json";
 import lrcLyricObj from "../assets/lyrics/lyric.json";
+
+import { usePlayerRef } from "../hooks/usePlayerRef";
 
 import Background from "../components/Background";
 import Player from "../components/Player";
@@ -13,13 +14,7 @@ const getMusic = (musicName) => musicName || "wrong-question";
 
 function Music() {
   const { musicName } = useParams();
-  // TODO: 훅으로 분리
-  const playerRef = useRef(null);
-  const setPlayerRef = useCallback((player) => {
-    if (player !== null) {
-      playerRef.current = player;
-    }
-  }, []);
+  const [playerRef, setPlayerRef] = usePlayerRef();
 
   const currentMusic = info[getMusic(musicName)];
   const [firstColor, secondColor] = currentMusic.themeColor;
@@ -27,7 +22,7 @@ function Music() {
 
   return (
     <Background firstColor={firstColor} secondColor={secondColor}>
-      <Player link={currentMusic.link} player={setPlayerRef} />
+      <Player link={currentMusic.link} setRef={setPlayerRef} />
       {lrcLyric ? (
         <LrcLyric lrcLyric={lrcLyric} textColor={currentMusic.textColor} />
       ) : (
