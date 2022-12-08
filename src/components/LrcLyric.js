@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
+import { styled } from "@mui/material/styles";
 import { Lrc } from "react-lrc";
 import { LyricContainer } from "./Lyric.js";
 
-function LrcLyric({ lrcLyric, textColor, getCurrentTime }) {
+const Line = styled("p")(({ color }) => ({
+  textAlign: "center",
+  color: color,
+}));
+
+function LrcLyric({ lrcLyric, activeColor, textColor, getCurrentTime }) {
   const [currentMillisecond, setCurrentMillisecond] = useState(0);
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -13,20 +19,13 @@ function LrcLyric({ lrcLyric, textColor, getCurrentTime }) {
       window.clearInterval(timer);
     };
   }, []);
+
   return (
     <LyricContainer>
       <Lrc
         lrc={lrcLyric}
-        lineRenderer={({ i, line, active }) => (
-          <p
-            key={i}
-            style={{
-              textAlign: "center",
-              color: active ? "blue" : textColor,
-            }}
-          >
-            {line.content}
-          </p>
+        lineRenderer={({ line, active }) => (
+          <Line color={active ? activeColor : textColor}>{line.content}</Line>
         )}
         currentMillisecond={currentMillisecond}
       />

@@ -25,6 +25,7 @@ function Music() {
       {lrcLyric && player ? (
         <LrcLyric
           lrcLyric={lrcLyric}
+          activeColor={currentMusic.activeColor}
           textColor={currentMusic.textColor}
           getCurrentTime={player.getCurrentTime}
         />
