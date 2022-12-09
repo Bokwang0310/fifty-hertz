@@ -1,14 +1,8 @@
 # 50Hz
 
-**배경 사진**
+## TODO
 
-속성 상속이 문제가 아니었다... 그냥 덮여버림
-
-[틀린 질문](https://images.unsplash.com/photo-1604604178488-03a6e925991e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1187&q=80)
-
-**TODO**
-
-- json에 `backgroundImg`, `comment` 추가
+- json에 `comment` 추가
 - `/` 핸들링
 - 유튜브 컨트롤을 표시하려고 하면 발생하는 에러 해결
 - lrc 만드는 페이지 제작
@@ -16,7 +10,7 @@
 - lrc 파일 그 자체로 쓰는 방법으로 바꾸기
 - `Generator.js`에서 `Music.js` 재사용하기
 
-**JSON 구조**
+## JSON 구조
 
 ```json
 {
@@ -24,26 +18,30 @@
     "link": "1a2b3c",
     "lyric": " ... ",
     "themeColor": ["#000000", "#ffffff"],
-    "textColor": "black"
+    "textColor": "black",
+    "highligtingColor": "white"
   },
   "musicName2": {
     "link": "3c2b1a",
     "lyric": " ... ",
     "themeColor": ["#ffffff", "#000000"],
-    "textColor": "white"
+    "textColor": "white",
+    "highligtingColor": "black"
   }
 }
 ```
 
-**musicName 규칙**
+## musicName 규칙
 
-띄어쓰기는 대쉬로, 모두 소문자, 최대한 영어를 사용하되 영어 부제 조차 없는 경우는 한국어로
+- 띄어쓰기 -> 대쉬
+- 소문자
+- 영어 부제도 없는 경우는 한국어
 
-**What I learned**
+## What I learned
 
 [lesson.md](./lesson.md)
 
-**메모**
+## 메모
 
 [YT Iframe API](https://developers.google.com/youtube/iframe_api_reference?hl=ko)
 
