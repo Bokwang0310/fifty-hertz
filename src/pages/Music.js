@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import info from "../assets/info.json";
-import lrcLyricObj from "../assets/lyrics/lyric.json";
 import { filterMusicName } from "../utils";
 
 import Background from "../components/Background";
@@ -13,23 +12,38 @@ import LrcLyric from "../components/LrcLyric";
 function Music() {
   const { musicName } = useParams();
   const [player, setPlayer] = useState(null);
+  const [lrcLyric, setLrcLyric] = useState(null);
 
-  const currentMusic = info[filterMusicName(musicName)];
-  const [firstColor, secondColor] = currentMusic.themeColor;
-  const lrcLyric = lrcLyricObj[filterMusicName(musicName)];
+  const currentMusicName = filterMusicName(musicName);
+  const currentMusicObj = info[currentMusicName];
+  const [firstColor, secondColor] = currentMusicObj.themeColor;
+
+  useEffect(() => {
+    fetch(`/lyrics/${filterMusicName(musicName)}.lrc`)
+      .then((res) => {
+        return res.text();
+      })
+      .then((text) => {
+        if (text[0] === "<") return setLrcLyric(null);
+        return setLrcLyric(text);
+      });
+  }, []);
 
   return (
     <Background firstColor={firstColor} secondColor={secondColor}>
-      <Player link={currentMusic.link} setRef={setPlayer} />
+      <Player link={currentMusicObj.link} setRef={setPlayer} />
       {lrcLyric && player ? (
         <LrcLyric
           lrcLyric={lrcLyric}
-          activeColor={currentMusic.activeColor}
-          textColor={currentMusic.textColor}
+          activeColor={currentMusicObj.activeColor}
+          textColor={currentMusicObj.textColor}
           getCurrentTime={player.getCurrentTime}
         />
       ) : (
-        <Lyric lyric={currentMusic.lyric} textColor={currentMusic.textColor} />
+        <Lyric
+          lyric={currentMusicObj.lyric}
+          textColor={currentMusicObj.textColor}
+        />
       )}
     </Background>
   );

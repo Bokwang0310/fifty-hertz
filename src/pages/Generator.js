@@ -15,10 +15,11 @@ function Generator() {
   const [player, setPlayer] = useState(null);
   const [open, setOpen] = useState(false);
 
-  const currentMusic = info[filterMusicName(musicName)];
-  const [firstColor, secondColor] = currentMusic.themeColor;
+  const currentMusicName = filterMusicName(musicName);
+  const currentMusicObj = info[currentMusicName];
+  const [firstColor, secondColor] = currentMusicObj.themeColor;
 
-  const lyricList = currentMusic.lyric.split("\n");
+  const lyricList = currentMusicObj.lyric.split("\n");
 
   const clickCountRef = useRef(0);
   const lrcLyricRef = useRef("");
@@ -56,8 +57,11 @@ function Generator() {
 
   return (
     <Background firstColor={firstColor} secondColor={secondColor}>
-      <Player link={currentMusic.link} setRef={setPlayer} />
-      <Lyric lyric={currentMusic.lyric} textColor={currentMusic.textColor} />
+      <Player link={currentMusicObj.link} setRef={setPlayer} />
+      <Lyric
+        lyric={currentMusicObj.lyric}
+        textColor={currentMusicObj.textColor}
+      />
       {open && (
         <Modal musicName={musicName} text={lrcLyricRef.current} open={open} />
       )}
