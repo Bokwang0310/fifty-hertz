@@ -15,8 +15,10 @@ function Lyric({ lyric, textColor }) {
 
   return (
     <LyricContainer>
-      {lyricList.map((sentence) => (
-        <Line color={textColor}>{sentence}</Line>
+      {lyricList.map((sentence, i) => (
+        <Line key={i} color={textColor}>
+          {sentence}
+        </Line>
       ))}
     </LyricContainer>
   );

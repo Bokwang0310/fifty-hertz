@@ -4,6 +4,7 @@ import { LyricContainer, Line } from "./Lyric.js";
 
 function LrcLyric({ lrcLyric, activeColor, textColor, getCurrentTime }) {
   const [currentMillisecond, setCurrentMillisecond] = useState(0);
+
   useEffect(() => {
     const timer = window.setInterval(() => {
       setCurrentMillisecond(getCurrentTime() * 1000);

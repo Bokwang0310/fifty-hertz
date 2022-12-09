@@ -4,12 +4,13 @@
 
 - json에 `comment` 추가
 - 유튜브 컨트롤을 표시하려고 하면 발생하는 에러 해결
-- lrc 만드는 페이지 제작
 - `Music` 컴포넌트 내부 완전 더러움 -> 변수 이름 고민 필요
 - lrc 파일 그 자체로 쓰는 방법으로 바꾸기
 - `Generator.js`에서 `Music.js` 재사용하기
 - 라우팅 어떻게 하지.. (`/` 핸들링, 잘못된 url 핸들링)
 - react-player 자동 스크롤 에러 해결
+- `/generator/:music`에서 `clickCount` 늘릴 때 마다 Line 앞에 표시 해주기
+- `lrcLyricRef`에 있는 값 저장할 수 있도록
 
 ## JSON 구조
 
@@ -20,14 +21,14 @@
     "lyric": " ... ",
     "themeColor": ["#000000", "#ffffff"],
     "textColor": "black",
-    "highligtingColor": "white"
+    "activeColor": "white"
   },
   "musicName2": {
     "link": "3c2b1a",
     "lyric": " ... ",
     "themeColor": ["#ffffff", "#000000"],
     "textColor": "white",
-    "highligtingColor": "black"
+    "activeColor": "black"
   }
 }
 ```
