@@ -1,12 +1,6 @@
 import { useState, useEffect } from "react";
-import { styled } from "@mui/material/styles";
 import { Lrc } from "react-lrc";
-import { LyricContainer } from "./Lyric.js";
-
-const Line = styled("p")(({ color }) => ({
-  textAlign: "center",
-  color: color,
-}));
+import { LyricContainer, Line } from "./Lyric.js";
 
 function LrcLyric({ lrcLyric, activeColor, textColor, getCurrentTime }) {
   const [currentMillisecond, setCurrentMillisecond] = useState(0);

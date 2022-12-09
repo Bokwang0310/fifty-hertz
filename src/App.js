@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
+
 import Music from "./pages/Music";
 import Generator from "./pages/Generator";
 
