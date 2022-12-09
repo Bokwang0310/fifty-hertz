@@ -10,8 +10,8 @@
 - 라우팅 어떻게 하지.. (`/` 핸들링, 잘못된 url 핸들링)
 - react-player 자동 스크롤 에러 해결
 - `/generator/:music`에서 `clickCount` 늘릴 때 마다 Line 앞에 표시 해주기
-- `lrcLyricRef`에 있는 값 저장할 수 있도록
 - generating UI 만들기
+- generating 시 싱크 살짝 밀리는 거 미세조정 (전체 오프셋 조정 ID 태그 이용)
 
 ## JSON 구조
 
