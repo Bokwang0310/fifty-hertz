@@ -2,31 +2,17 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 import info from "../assets/info.json";
+import { getLrcTimeFormatFromSeconds, filterMusicName } from "../utils";
 
 import Background from "../components/Background";
 import Player from "../components/Player";
 import Lyric from "../components/Lyric";
 
-const getMusic = (musicName) => musicName || "wrong-question";
-
-const padTo2Digits = (num) => num.toString().padStart(2, "0");
-
-const getLrcTimeFormatFromTotalSeconds = (totalSeconds) => {
-  const fixedTotalSeconds = totalSeconds.toFixed(2);
-  const int = Math.trunc(fixedTotalSeconds);
-  const float = fixedTotalSeconds - int;
-
-  const [minutes, seconds] = [Math.floor(int / 60), int % 60];
-  return `${padTo2Digits(minutes)}:${padTo2Digits(seconds)}.${padTo2Digits(
-    Math.trunc(float * 100)
-  )}`;
-};
-
 function Generator() {
   const { musicName } = useParams();
   const [player, setPlayer] = useState(null);
 
-  const currentMusic = info[getMusic(musicName)];
+  const currentMusic = info[filterMusicName(musicName)];
   const [firstColor, secondColor] = currentMusic.themeColor;
 
   const lyricList = currentMusic.lyric.split("\n");
@@ -36,24 +22,21 @@ function Generator() {
 
   const handleKeyDown = useCallback(
     (event) => {
-      if (event.key === "Enter" && player !== null) {
-        const currentSeconds = player.getCurrentTime();
-        const lrcTimeFormatOfCurrentTime =
-          getLrcTimeFormatFromTotalSeconds(currentSeconds);
+      if (event.key !== "Enter" || player === null) return;
 
-        const currentClickCount = clickCountRef.current;
-        if (currentClickCount === lyricList.length) {
-          console.log("끝");
-          console.log(lrcLyricRef.current);
-          return;
-        }
+      const currentClickCount = clickCountRef.current;
 
-        const currentLrcLine = `[${lrcTimeFormatOfCurrentTime}] ${lyricList[currentClickCount]}`;
-        console.log(currentLrcLine);
-        clickCountRef.current += 1;
-
-        lrcLyricRef.current += `${currentLrcLine}\n`;
+      if (currentClickCount === lyricList.length) {
+        console.log(lrcLyricRef.current); // 결과물
+        return;
       }
+
+      const lrcTimeFormatOfCurrentTime = getLrcTimeFormatFromSeconds(
+        player.getCurrentTime()
+      );
+
+      clickCountRef.current += 1;
+      lrcLyricRef.current += `[${lrcTimeFormatOfCurrentTime}] ${lyricList[currentClickCount]}\n`;
     },
     [player]
   );

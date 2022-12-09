@@ -11,6 +11,7 @@
 - react-player 자동 스크롤 에러 해결
 - `/generator/:music`에서 `clickCount` 늘릴 때 마다 Line 앞에 표시 해주기
 - `lrcLyricRef`에 있는 값 저장할 수 있도록
+- generating UI 만들기
 
 ## JSON 구조
 
