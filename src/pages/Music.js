@@ -19,6 +19,9 @@ function Music() {
   const [firstColor, secondColor] = currentMusicObj.themeColor;
 
   useEffect(() => {
+    const htmlTitle = document.querySelector("title");
+    htmlTitle.innerText = `${currentMusicName} - 50Hz`;
+
     fetch(`/lyrics/${filterMusicName(musicName)}.lrc`)
       .then((res) => {
         return res.text();

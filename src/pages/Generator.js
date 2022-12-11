@@ -49,6 +49,11 @@ function Generator() {
   );
 
   useEffect(() => {
+    const htmlTitle = document.querySelector("title");
+    htmlTitle.innerText = `${currentMusicName} - 50Hz`;
+  }, []);
+
+  useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
@@ -57,7 +62,7 @@ function Generator() {
 
   return (
     <Background firstColor={firstColor} secondColor={secondColor}>
-      <Player link={currentMusicObj.link} setRef={setPlayer} />
+      <Player url={currentMusicObj.url} setRef={setPlayer} />
       <Lyric
         lyric={currentMusicObj.lyric}
         textColor={currentMusicObj.textColor}
