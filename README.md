@@ -11,20 +11,21 @@
 - `/generator/:music`에서 `clickCount` 늘릴 때 마다 Line 앞에 표시 해주기
 - generating UI 만들기
 - generating 시 싱크 살짝 밀리는 거 미세조정 (전체 오프셋 조정 ID 태그 이용)
+- html title 곡 마다 바꾸자
 
 ## JSON 구조
 
 ```json
 {
   "musicName1": {
-    "link": "1a2b3c",
+    "url": "1a2b3c",
     "lyric": " ... ",
     "themeColor": ["#000000", "#ffffff"],
     "textColor": "black",
     "activeColor": "white"
   },
   "musicName2": {
-    "link": "3c2b1a",
+    "url": "3c2b1a",
     "lyric": " ... ",
     "themeColor": ["#ffffff", "#000000"],
     "textColor": "white",

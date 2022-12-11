@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import ReactPlayer from "react-player/youtube";
+import ReactPlayer from "react-player";
 
 const PlayerContainer = styled("div")(() => ({
   marginTop: "16px",
@@ -7,21 +7,34 @@ const PlayerContainer = styled("div")(() => ({
   height: "315px",
 }));
 
-function Player({ link, setRef }) {
+function Player({ url, setRef }) {
   const config = {
-    playerVars: {
-      // controls: 1,
-      autoplay: 1,
-      rel: 0,
-      modestbranding: 1,
-      fs: 0,
+    youtube: {
+      playerVars: {
+        // controls: 1,
+        autoplay: 1,
+        rel: 0,
+        modestbranding: 1,
+        fs: 0,
+      },
+    },
+    soundcloud: {
+      options: {
+        auto_play: true,
+        buying: false,
+        sharing: false,
+        download: false,
+        show_playcount: false,
+        single_active: false,
+        show_artwork: true,
+      },
     },
   };
 
   return (
     <PlayerContainer>
       <ReactPlayer
-        url={`https://www.youtube.com/embed/${link}`}
+        url={url}
         config={config}
         playing={true}
         width={"560px"}

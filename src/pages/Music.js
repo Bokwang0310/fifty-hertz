@@ -31,7 +31,7 @@ function Music() {
 
   return (
     <Background firstColor={firstColor} secondColor={secondColor}>
-      <Player link={currentMusicObj.link} setRef={setPlayer} />
+      <Player url={currentMusicObj.url} setRef={setPlayer} />
       {lrcLyric && player ? (
         <LrcLyric
           lrcLyric={lrcLyric}
