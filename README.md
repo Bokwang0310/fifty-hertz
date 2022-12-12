@@ -3,12 +3,13 @@
 ## TODO
 
 - json에 `comment` 추가
-- 유튜브 컨트롤을 표시하려고 하면 발생하는 에러 해결
-- 라우팅 어떻게 하지.. (`/` 핸들링, 잘못된 url 핸들링)
+- 유튜브 컨트롤을 표시하려고 하면 에러 발생
+- 메인 페이지 만들기
+- 잘못된 url 핸들링
 - react-player 자동 스크롤 에러 해결
-- `/generator/:music`에서 `clickCount` 늘릴 때 마다 Line 앞에 표시 해주기
+- `/:name/generator`에서 `clickCount` 늘릴 때 마다 Line 앞에 표시 해주기
 - generating UI 만들기
-- generating 시 싱크 살짝 밀리는 거 미세조정 (전체 오프셋 조정 ID 태그 이용)
+- lrc 만들면 싱크 살짝 밀리는 거 미세조정 (전체 오프셋 조정 ID 태그 이용)
 
 ## JSON 구조
 
