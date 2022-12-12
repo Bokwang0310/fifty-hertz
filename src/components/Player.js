@@ -7,7 +7,7 @@ const PlayerContainer = styled("div")(() => ({
   height: "315px",
 }));
 
-function Player({ url, setRef }) {
+function Player({ url, handleReady }) {
   const config = {
     youtube: {
       playerVars: {
@@ -40,7 +40,7 @@ function Player({ url, setRef }) {
         width={"560px"}
         height={"315px"}
         // controls={true}
-        ref={setRef}
+        onReady={handleReady}
       />
     </PlayerContainer>
   );

@@ -1,32 +1,20 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { useParams } from "react-router-dom";
 
-import info from "../assets/info.json";
-import { getLrcTimeFormatFromSeconds, filterMusicName } from "../utils";
+import { getLrcTimeFormatFromSeconds } from "../utils";
 
-import Background from "../components/Background";
-import Player from "../components/Player";
-import Lyric from "../components/Lyric";
 import Modal from "../components/Modal";
 
-function Generator() {
-  const { musicName } = useParams();
-
-  const [player, setPlayer] = useState(null);
+function Generator({ musicName, isPlayerReady, getCurrentTime, musicInfo }) {
   const [open, setOpen] = useState(false);
 
-  const currentMusicName = filterMusicName(musicName);
-  const currentMusicObj = info[currentMusicName];
-  const [firstColor, secondColor] = currentMusicObj.themeColor;
-
-  const lyricList = currentMusicObj.lyric.split("\n");
+  const lyricList = musicInfo.lyric.split("\n");
 
   const clickCountRef = useRef(0);
   const lrcLyricRef = useRef("");
 
   const handleKeyDown = useCallback(
     (event) => {
-      if (event.key !== "Enter" || player === null) return;
+      if (event.key !== "Enter" || !isPlayerReady) return;
 
       const currentClickCount = clickCountRef.current;
 
@@ -39,38 +27,26 @@ function Generator() {
       }
 
       const lrcTimeFormatOfCurrentTime = getLrcTimeFormatFromSeconds(
-        player.getCurrentTime()
+        getCurrentTime()
       );
 
       clickCountRef.current += 1;
       lrcLyricRef.current += `[${lrcTimeFormatOfCurrentTime}] ${lyricList[currentClickCount]}\n`;
     },
-    [player]
+    [isPlayerReady, lyricList]
   );
-
-  useEffect(() => {
-    const htmlTitle = document.querySelector("title");
-    htmlTitle.innerText = `${currentMusicName} - 50Hz`;
-  }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  });
+  }, [handleKeyDown]);
 
   return (
-    <Background firstColor={firstColor} secondColor={secondColor}>
-      <Player url={currentMusicObj.url} setRef={setPlayer} />
-      <Lyric
-        lyric={currentMusicObj.lyric}
-        textColor={currentMusicObj.textColor}
-      />
-      {open && (
-        <Modal musicName={musicName} text={lrcLyricRef.current} open={open} />
-      )}
-    </Background>
+    open && (
+      <Modal musicName={musicName} text={lrcLyricRef.current} open={open} />
+    )
   );
 }
 

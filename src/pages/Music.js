@@ -1,53 +1,58 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 
 import info from "../assets/info.json";
 import { filterMusicName } from "../utils";
 
+import Generator from "./Generator";
 import Background from "../components/Background";
 import Player from "../components/Player";
 import Lyric from "../components/Lyric";
-import LrcLyric from "../components/LrcLyric";
 
 function Music() {
-  const { musicName } = useParams();
-  const [player, setPlayer] = useState(null);
-  const [lrcLyric, setLrcLyric] = useState(null);
+  const { name } = useParams();
 
-  const currentMusicName = filterMusicName(musicName);
-  const currentMusicObj = info[currentMusicName];
-  const [firstColor, secondColor] = currentMusicObj.themeColor;
+  // TODO: ref로 관리
+  const [getCurrentTime, setGetCurrentTime] = useState(null);
+  const [isPlayerReady, setPlayerReady] = useState(false);
+
+  const musicName = filterMusicName(name);
+  const musicInfo = info[musicName];
+  const [firstColor, secondColor] = musicInfo.themeColor;
 
   useEffect(() => {
     const htmlTitle = document.querySelector("title");
-    htmlTitle.innerText = `${currentMusicName} - 50Hz`;
-
-    fetch(`/lyrics/${filterMusicName(musicName)}.lrc`)
-      .then((res) => {
-        return res.text();
-      })
-      .then((text) => {
-        if (text[0] === "<") return setLrcLyric(null);
-        return setLrcLyric(text);
-      });
-  }, []);
+    htmlTitle.innerText = `${musicName} - 50Hz`;
+  }, [musicName]);
 
   return (
     <Background firstColor={firstColor} secondColor={secondColor}>
-      <Player url={currentMusicObj.url} setRef={setPlayer} />
-      {lrcLyric && player ? (
-        <LrcLyric
-          lrcLyric={lrcLyric}
-          activeColor={currentMusicObj.activeColor}
-          textColor={currentMusicObj.textColor}
-          getCurrentTime={player.getCurrentTime}
+      <Player
+        url={musicInfo.url}
+        handleReady={(player) => {
+          setPlayerReady(() => true);
+          setGetCurrentTime(() => player.getCurrentTime);
+        }}
+      />
+      <Routes>
+        <Route
+          path="generator"
+          element={
+            <Generator
+              musicName={musicName}
+              musicInfo={musicInfo}
+              getCurrentTime={getCurrentTime}
+              isPlayerReady={isPlayerReady}
+            />
+          }
         />
-      ) : (
-        <Lyric
-          lyric={currentMusicObj.lyric}
-          textColor={currentMusicObj.textColor}
-        />
-      )}
+      </Routes>
+      <Lyric
+        musicName={musicName}
+        musicInfo={musicInfo}
+        getCurrentTime={getCurrentTime}
+        isPlayerReady={isPlayerReady}
+      />
     </Background>
   );
 }

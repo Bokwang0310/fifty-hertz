@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Lrc } from "react-lrc";
-import { LyricContainer, Line } from "./Lyric.js";
+import { LyricContainer, Line } from "./DefaultLyric.js";
 
 function LrcLyric({ lrcLyric, activeColor, textColor, getCurrentTime }) {
   const [currentMillisecond, setCurrentMillisecond] = useState(0);

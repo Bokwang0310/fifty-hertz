@@ -1,27 +1,30 @@
-import { styled } from "@mui/material/styles";
+import { useState, useEffect } from "react";
 
-export const LyricContainer = styled("div")(() => ({
-  marginTop: "10px",
-  fontFamily: "'Noto Serif KR', serif",
-}));
+import DefaultLyric from "./DefaultLyric";
+import SyncLyric from "./SyncLyric";
 
-export const Line = styled("p")(({ color }) => ({
-  textAlign: "center",
-  color: color,
-}));
+// generator에서는 default lyric
 
-function Lyric({ lyric, textColor }) {
-  const lyricList = lyric.split("\n");
+function ResultLyric({ musicName, musicInfo, isPlayerReady, getCurrentTime }) {
+  const [lrcLyric, setLrcLyric] = useState("");
 
-  return (
-    <LyricContainer>
-      {lyricList.map((sentence, i) => (
-        <Line key={i} color={textColor}>
-          {sentence}
-        </Line>
-      ))}
-    </LyricContainer>
+  useEffect(() => {
+    fetch(`/lyrics/${musicName}.lrc`)
+      .then((res) => res.text())
+      .then((text) => (text[0] === "<" ? setLrcLyric("") : setLrcLyric(text)))
+      .catch((err) => console.error(err));
+  }, [musicName]);
+
+  return isPlayerReady && lrcLyric ? (
+    <SyncLyric
+      lrcLyric={lrcLyric}
+      activeColor={musicInfo.activeColor}
+      textColor={musicInfo.textColor}
+      getCurrentTime={getCurrentTime}
+    />
+  ) : (
+    <DefaultLyric lyric={musicInfo.lyric} textColor={musicInfo.textColor} />
   );
 }
 
-export default Lyric;
+export default ResultLyric;
