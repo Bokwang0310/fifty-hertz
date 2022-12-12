@@ -13,7 +13,7 @@ function LrcLyric({ lrcLyric, activeColor, textColor, getCurrentTime }) {
     return () => {
       window.clearInterval(timer);
     };
-  }, []);
+  }, [getCurrentTime]);
 
   return (
     <LyricContainer>

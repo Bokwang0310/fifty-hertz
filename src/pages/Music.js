@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Routes, Route, useParams } from "react-router-dom";
 
 import info from "../assets/info.json";
@@ -12,9 +12,8 @@ import Lyric from "../components/Lyric";
 function Music() {
   const { name } = useParams();
 
-  // TODO: ref로 관리
-  const [getCurrentTime, setGetCurrentTime] = useState(null);
   const [isPlayerReady, setPlayerReady] = useState(false);
+  const getCurrentTimeRef = useRef();
 
   const musicName = filterMusicName(name);
   const musicInfo = info[musicName];
@@ -31,7 +30,7 @@ function Music() {
         url={musicInfo.url}
         handleReady={(player) => {
           setPlayerReady(() => true);
-          setGetCurrentTime(() => player.getCurrentTime);
+          getCurrentTimeRef.current = player.getCurrentTime;
         }}
       />
       <Routes>
@@ -41,7 +40,7 @@ function Music() {
             <Generator
               musicName={musicName}
               musicInfo={musicInfo}
-              getCurrentTime={getCurrentTime}
+              getCurrentTime={getCurrentTimeRef.current}
               isPlayerReady={isPlayerReady}
             />
           }
@@ -50,7 +49,7 @@ function Music() {
       <Lyric
         musicName={musicName}
         musicInfo={musicInfo}
-        getCurrentTime={getCurrentTime}
+        getCurrentTime={getCurrentTimeRef.current}
         isPlayerReady={isPlayerReady}
       />
     </Background>

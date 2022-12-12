@@ -33,7 +33,7 @@ function Generator({ musicName, isPlayerReady, getCurrentTime, musicInfo }) {
       clickCountRef.current += 1;
       lrcLyricRef.current += `[${lrcTimeFormatOfCurrentTime}] ${lyricList[currentClickCount]}\n`;
     },
-    [isPlayerReady, lyricList]
+    [isPlayerReady, lyricList, getCurrentTime]
   );
 
   useEffect(() => {
