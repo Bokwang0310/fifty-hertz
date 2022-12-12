@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Lrc } from "react-lrc";
 import { LyricContainer, Line } from "./DefaultLyric.js";
 
-function LrcLyric({ lrcLyric, activeColor, textColor, getCurrentTime }) {
+function SyncLyric({ lrcLyric, activeColor, textColor, getCurrentTime }) {
   const [currentMillisecond, setCurrentMillisecond] = useState(0);
 
   useEffect(() => {
@@ -28,4 +28,4 @@ function LrcLyric({ lrcLyric, activeColor, textColor, getCurrentTime }) {
   );
 }
 
-export default LrcLyric;
+export default SyncLyric;

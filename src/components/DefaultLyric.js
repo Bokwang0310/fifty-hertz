@@ -10,7 +10,7 @@ export const Line = styled("p")(({ color }) => ({
   color: color,
 }));
 
-function Lyric({ lyric, textColor }) {
+function DefaultLyric({ lyric, textColor }) {
   const lyricList = lyric.split("\n");
 
   return (
@@ -24,4 +24,4 @@ function Lyric({ lyric, textColor }) {
   );
 }
 
-export default Lyric;
+export default DefaultLyric;

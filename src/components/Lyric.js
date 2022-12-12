@@ -3,9 +3,13 @@ import { useState, useEffect } from "react";
 import DefaultLyric from "./DefaultLyric";
 import SyncLyric from "./SyncLyric";
 
-// generator에서는 default lyric
-
-function ResultLyric({ musicName, musicInfo, isPlayerReady, getCurrentTime }) {
+function Lyric({
+  musicName,
+  musicInfo,
+  isPlayerReady,
+  getCurrentTime,
+  isSync,
+}) {
   const [lrcLyric, setLrcLyric] = useState("");
 
   useEffect(() => {
@@ -15,7 +19,7 @@ function ResultLyric({ musicName, musicInfo, isPlayerReady, getCurrentTime }) {
       .catch((err) => console.error(err));
   }, [musicName]);
 
-  return isPlayerReady && lrcLyric ? (
+  return !isSync && isPlayerReady && lrcLyric ? (
     <SyncLyric
       lrcLyric={lrcLyric}
       activeColor={musicInfo.activeColor}
@@ -27,4 +31,4 @@ function ResultLyric({ musicName, musicInfo, isPlayerReady, getCurrentTime }) {
   );
 }
 
-export default ResultLyric;
+export default Lyric;

@@ -29,8 +29,8 @@ function Music() {
       <Player
         url={musicInfo.url}
         handleReady={(player) => {
-          setPlayerReady(() => true);
           getCurrentTimeRef.current = player.getCurrentTime;
+          setPlayerReady(true);
         }}
       />
       <Routes>
@@ -51,6 +51,7 @@ function Music() {
         musicInfo={musicInfo}
         getCurrentTime={getCurrentTimeRef.current}
         isPlayerReady={isPlayerReady}
+        isSync={window.location.pathname.includes("generator")}
       />
     </Background>
   );
