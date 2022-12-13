@@ -19,6 +19,8 @@ function Music() {
   const musicInfo = info[musicName];
   const [firstColor, secondColor] = musicInfo.themeColor;
 
+  const [lyric, setLyric] = useState(musicInfo.lyric);
+
   useEffect(() => {
     const htmlTitle = document.querySelector("title");
     htmlTitle.innerText = `${musicName} - 50Hz`;
@@ -42,13 +44,23 @@ function Music() {
               musicInfo={musicInfo}
               getCurrentTime={getCurrentTimeRef.current}
               isPlayerReady={isPlayerReady}
+              changeLyricLine={(lineIndex) => {
+                setLyric((prevLyric) =>
+                  prevLyric
+                    .split("\n")
+                    .map((line, i) => (i == lineIndex ? `✔️ ${line}` : line))
+                    .join("\n")
+                );
+              }}
             />
           }
         />
       </Routes>
       <Lyric
         musicName={musicName}
-        musicInfo={musicInfo}
+        textColor={musicInfo.textColor}
+        activeColor={musicInfo.activeColor}
+        lyric={lyric}
         getCurrentTime={getCurrentTimeRef.current}
         isPlayerReady={isPlayerReady}
         isSync={window.location.pathname.includes("generator")}

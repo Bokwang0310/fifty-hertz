@@ -10,6 +10,7 @@
 - `/:name/generator`에서 `clickCount` 늘릴 때 마다 Line 앞에 표시 해주기
 - generating UI 만들기
 - lrc 만들면 싱크 살짝 밀리는 거 미세조정 (전체 오프셋 조정 ID 태그 이용)
+- 새로고침하는 로직 바꾸자
 
 ## JSON 구조
 

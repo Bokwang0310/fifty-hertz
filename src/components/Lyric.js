@@ -5,7 +5,9 @@ import SyncLyric from "./SyncLyric";
 
 function Lyric({
   musicName,
-  musicInfo,
+  textColor,
+  activeColor,
+  lyric,
   isPlayerReady,
   getCurrentTime,
   isSync,
@@ -22,12 +24,12 @@ function Lyric({
   return !isSync && isPlayerReady && lrcLyric ? (
     <SyncLyric
       lrcLyric={lrcLyric}
-      activeColor={musicInfo.activeColor}
-      textColor={musicInfo.textColor}
+      activeColor={activeColor}
+      textColor={textColor}
       getCurrentTime={getCurrentTime}
     />
   ) : (
-    <DefaultLyric lyric={musicInfo.lyric} textColor={musicInfo.textColor} />
+    <DefaultLyric lyric={lyric} textColor={textColor} />
   );
 }
 

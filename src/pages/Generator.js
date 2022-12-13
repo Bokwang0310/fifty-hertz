@@ -4,7 +4,13 @@ import { getLrcTimeFormatFromSeconds } from "../utils";
 
 import Modal from "../components/Modal";
 
-function Generator({ musicName, isPlayerReady, getCurrentTime, musicInfo }) {
+function Generator({
+  musicName,
+  isPlayerReady,
+  getCurrentTime,
+  musicInfo,
+  changeLyricLine,
+}) {
   const [open, setOpen] = useState(false);
 
   const lyricList = musicInfo.lyric.split("\n");
@@ -18,6 +24,7 @@ function Generator({ musicName, isPlayerReady, getCurrentTime, musicInfo }) {
 
       const currentClickCount = clickCountRef.current;
 
+      // 다 만들고 클릭 하나 더 받음
       if (currentClickCount === lyricList.length) {
         const answer = window.confirm(
           "LRC 파일이 생성되었습니다. 결과물을 다운 받으시겠습니까?"
@@ -30,6 +37,7 @@ function Generator({ musicName, isPlayerReady, getCurrentTime, musicInfo }) {
         getCurrentTime()
       );
 
+      changeLyricLine(clickCountRef.current);
       clickCountRef.current += 1;
       lrcLyricRef.current += `[${lrcTimeFormatOfCurrentTime}] ${lyricList[currentClickCount]}\n`;
     },
