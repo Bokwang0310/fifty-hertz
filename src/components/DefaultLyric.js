@@ -10,14 +10,12 @@ export const Line = styled("p")(({ color }) => ({
   color: color,
 }));
 
-function DefaultLyric({ lyric, textColor }) {
-  const lyricList = lyric.split("\n");
-
+function DefaultLyric({ lyricList, textColor }) {
   return (
     <LyricContainer>
-      {lyricList.map((sentence, i) => (
+      {lyricList.map((lyric, i) => (
         <Line key={i} color={textColor}>
-          {sentence}
+          {lyric}
         </Line>
       ))}
     </LyricContainer>

@@ -6,15 +6,12 @@ import Modal from "../components/Modal";
 
 function Generator({
   musicName,
+  lyricList,
   isPlayerReady,
   getCurrentTime,
-  musicInfo,
   changeLyricLine,
 }) {
   const [open, setOpen] = useState(false);
-
-  const lyricList = musicInfo.lyric.split("\n");
-
   const clickCountRef = useRef(0);
   const lrcLyricRef = useRef("");
 
@@ -37,9 +34,9 @@ function Generator({
         getCurrentTime()
       );
 
+      lrcLyricRef.current += `[${lrcTimeFormatOfCurrentTime}] ${lyricList[currentClickCount]}\n`;
       changeLyricLine(clickCountRef.current);
       clickCountRef.current += 1;
-      lrcLyricRef.current += `[${lrcTimeFormatOfCurrentTime}] ${lyricList[currentClickCount]}\n`;
     },
     [isPlayerReady, lyricList, getCurrentTime]
   );

@@ -7,7 +7,7 @@ function Lyric({
   musicName,
   textColor,
   activeColor,
-  lyric,
+  lyricList,
   isPlayerReady,
   getCurrentTime,
   isSync,
@@ -17,8 +17,10 @@ function Lyric({
   useEffect(() => {
     fetch(`/lyrics/${musicName}.lrc`)
       .then((res) => res.text())
-      .then((text) => (text[0] === "<" ? setLrcLyric("") : setLrcLyric(text)))
-      .catch((err) => console.error(err));
+      .then(
+        (text) => (text[0] === "<" ? setLrcLyric("") : setLrcLyric(text)),
+        (err) => console.error(err)
+      );
   }, [musicName]);
 
   return !isSync && isPlayerReady && lrcLyric ? (
@@ -29,7 +31,7 @@ function Lyric({
       getCurrentTime={getCurrentTime}
     />
   ) : (
-    <DefaultLyric lyric={lyric} textColor={textColor} />
+    <DefaultLyric lyricList={lyricList} textColor={textColor} />
   );
 }
 

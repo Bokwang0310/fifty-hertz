@@ -16,10 +16,14 @@ function Music() {
   const getCurrentTimeRef = useRef();
 
   const musicName = filterMusicName(name);
-  const musicInfo = info[musicName];
-  const [firstColor, secondColor] = musicInfo.themeColor;
-
-  const [lyric, setLyric] = useState(musicInfo.lyric);
+  const {
+    url,
+    lyric: lyricText,
+    themeColor: [firstColor, secondColor],
+    textColor,
+    activeColor,
+  } = info[musicName];
+  const [lyricList, setLyricList] = useState(lyricText.split("\n"));
 
   useEffect(() => {
     const htmlTitle = document.querySelector("title");
@@ -29,7 +33,7 @@ function Music() {
   return (
     <Background firstColor={firstColor} secondColor={secondColor}>
       <Player
-        url={musicInfo.url}
+        url={url}
         handleReady={(player) => {
           getCurrentTimeRef.current = player.getCurrentTime;
           setPlayerReady(true);
@@ -41,15 +45,14 @@ function Music() {
           element={
             <Generator
               musicName={musicName}
-              musicInfo={musicInfo}
+              lyricList={lyricList}
               getCurrentTime={getCurrentTimeRef.current}
               isPlayerReady={isPlayerReady}
               changeLyricLine={(lineIndex) => {
-                setLyric((prevLyric) =>
-                  prevLyric
-                    .split("\n")
-                    .map((line, i) => (i == lineIndex ? `✔️ ${line}` : line))
-                    .join("\n")
+                setLyricList((prevLyricList) =>
+                  prevLyricList.map((line, i) =>
+                    i === lineIndex ? `✔️ ${line}` : line
+                  )
                 );
               }}
             />
@@ -58,9 +61,9 @@ function Music() {
       </Routes>
       <Lyric
         musicName={musicName}
-        textColor={musicInfo.textColor}
-        activeColor={musicInfo.activeColor}
-        lyric={lyric}
+        textColor={textColor}
+        activeColor={activeColor}
+        lyricList={lyricList}
         getCurrentTime={getCurrentTimeRef.current}
         isPlayerReady={isPlayerReady}
         isSync={window.location.pathname.includes("generator")}
