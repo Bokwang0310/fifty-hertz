@@ -7,30 +7,30 @@ const PlayerContainer = styled("div")(() => ({
   height: "315px",
 }));
 
-function Player({ url, handleReady }) {
-  const config = {
-    youtube: {
-      playerVars: {
-        // controls: 1,
-        autoplay: 1,
-        rel: 0,
-        modestbranding: 1,
-        fs: 0,
-      },
+const config = {
+  youtube: {
+    playerVars: {
+      // controls: 1,
+      autoplay: 1,
+      rel: 0,
+      modestbranding: 1,
+      fs: 0,
     },
-    soundcloud: {
-      options: {
-        auto_play: true,
-        buying: false,
-        sharing: false,
-        download: false,
-        show_playcount: false,
-        single_active: false,
-        show_artwork: true,
-      },
+  },
+  soundcloud: {
+    options: {
+      auto_play: true,
+      buying: false,
+      sharing: false,
+      download: false,
+      show_playcount: false,
+      single_active: false,
+      show_artwork: true,
     },
-  };
+  },
+};
 
+function Player({ url, onReady }) {
   return (
     <PlayerContainer>
       <ReactPlayer
@@ -40,7 +40,7 @@ function Player({ url, handleReady }) {
         width={"560px"}
         height={"315px"}
         // controls={true}
-        onReady={handleReady}
+        onReady={onReady}
       />
     </PlayerContainer>
   );

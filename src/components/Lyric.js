@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import DefaultLyric from "./DefaultLyric";
 import SyncLyric from "./SyncLyric";
 
@@ -8,9 +7,8 @@ function Lyric({
   textColor,
   activeColor,
   lyricList,
-  isPlayerReady,
   getCurrentTime,
-  isSync,
+  isSyncLyric,
 }) {
   const [lrcLyric, setLrcLyric] = useState("");
 
@@ -23,11 +21,11 @@ function Lyric({
       );
   }, [musicName]);
 
-  return !isSync && isPlayerReady && lrcLyric ? (
+  return isSyncLyric && lrcLyric ? (
     <SyncLyric
       lrcLyric={lrcLyric}
-      activeColor={activeColor}
       textColor={textColor}
+      activeColor={activeColor}
       getCurrentTime={getCurrentTime}
     />
   ) : (

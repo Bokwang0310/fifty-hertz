@@ -1,7 +1,5 @@
-import { useState, useEffect, useCallback, useRef } from "react";
-
+import { useState, useEffect, useRef, useCallback } from "react";
 import { getLrcTimeFormatFromSeconds } from "../utils";
-
 import Modal from "../components/Modal";
 
 function Generator({
@@ -48,11 +46,7 @@ function Generator({
     };
   }, [handleKeyDown]);
 
-  return (
-    open && (
-      <Modal musicName={musicName} text={lrcLyricRef.current} open={open} />
-    )
-  );
+  return <Modal open={open} text={lrcLyricRef.current} musicName={musicName} />;
 }
 
 export default Generator;

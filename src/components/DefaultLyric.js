@@ -6,8 +6,8 @@ export const LyricContainer = styled("div")(() => ({
 }));
 
 export const Line = styled("p")(({ color }) => ({
+  color,
   textAlign: "center",
-  color: color,
 }));
 
 function DefaultLyric({ lyricList, textColor }) {

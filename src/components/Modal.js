@@ -14,7 +14,7 @@ const style = {
   p: 4,
 };
 
-function Modal({ musicName, text, open }) {
+function Modal({ open, text, musicName }) {
   return (
     <MuiModal
       open={open}

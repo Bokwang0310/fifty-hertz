@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Routes, Route, useParams } from "react-router-dom";
 
-import info from "../assets/info.json";
+import musicInfo from "../assets/music_info.json";
 import { filterMusicName } from "../utils";
 
 import Generator from "./Generator";
@@ -11,19 +11,19 @@ import Lyric from "../components/Lyric";
 
 function Music() {
   const { name } = useParams();
-
-  const [isPlayerReady, setPlayerReady] = useState(false);
-  const getCurrentTimeRef = useRef();
-
   const musicName = filterMusicName(name);
+
   const {
     url,
     lyric: lyricText,
     themeColor: [firstColor, secondColor],
     textColor,
     activeColor,
-  } = info[musicName];
+  } = musicInfo[musicName];
+
   const [lyricList, setLyricList] = useState(lyricText.split("\n"));
+  const [isPlayerReady, setPlayerReady] = useState(false);
+  const getCurrentTimeRef = useRef();
 
   useEffect(() => {
     const htmlTitle = document.querySelector("title");
@@ -34,7 +34,7 @@ function Music() {
     <Background firstColor={firstColor} secondColor={secondColor}>
       <Player
         url={url}
-        handleReady={(player) => {
+        onReady={(player) => {
           getCurrentTimeRef.current = player.getCurrentTime;
           setPlayerReady(true);
         }}
@@ -46,12 +46,12 @@ function Music() {
             <Generator
               musicName={musicName}
               lyricList={lyricList}
-              getCurrentTime={getCurrentTimeRef.current}
               isPlayerReady={isPlayerReady}
+              getCurrentTime={getCurrentTimeRef.current}
               changeLyricLine={(lineIndex) => {
                 setLyricList((prevLyricList) =>
-                  prevLyricList.map((line, i) =>
-                    i === lineIndex ? `✔️ ${line}` : line
+                  prevLyricList.map((lyric, i) =>
+                    i === lineIndex ? `✔️ ${lyric}` : lyric
                   )
                 );
               }}
@@ -65,8 +65,9 @@ function Music() {
         activeColor={activeColor}
         lyricList={lyricList}
         getCurrentTime={getCurrentTimeRef.current}
-        isPlayerReady={isPlayerReady}
-        isSync={window.location.pathname.includes("generator")}
+        isSyncLyric={
+          !window.location.pathname.includes("generator") && isPlayerReady
+        }
       />
     </Background>
   );
