@@ -1,6 +1,6 @@
 > :warning: 이 문서는 프로젝트를 진행하며 새롭게 배운 것을 정리하는 곳으로 **잘못된 정보를 포함하고 있을 수 있습니다.**
 
-# 인라인 스타일과 CSS-in-JS
+# Inline Style and CSS-in-JS
 
 ```jsx
 const styles = {
@@ -41,7 +41,7 @@ function Comp() {
 
 MUI의 경우, v4까지는 JSS 기반의 `makeStyles()`를 쓰다가 여러 이유로 v5부터는 emotion으로 넘어간 듯 [관련 글](https://hoontae24.github.io/19)
 
-# styled()의 옵션 객체에서의 shouldForwardProp 메소드
+# `shouldForwardProp` method in option object of `styled`
 
 `styled()`를 이용하여 만든 컴포넌트에 props를 사용하고 싶을 때 다음과 같은 방법을 직관적으로 생각할 수 있다.
 
@@ -55,7 +55,7 @@ function Comp() {
 }
 ```
 
-이 경우 실제로 문제가 되지 않는다. 왜냐하면 내부적으로 emotion은 우리가 만든 prop인 `color`를 실제 DOM 요소인 div의 속성으로 삽입하는데, `color`는 원래 div의 속성이기 때문에 아무 문제가 되지 않는다. 하지만 다음과 같은 경우에는 문제가 발생한다.
+이 경우 실제로 문제가 되지 않는다. 왜냐하면 내부적으로 emotion은 우리가 만든 prop인 `color`를 실제 DOM 요소인 div의 속성으로 삽입하는데, `color`는 원래 div의 속성으로 사용될 수 있기 때문이다. 하지만 다음과 같은 경우에는 문제가 발생한다.
 
 ```jsx
 const MyDiv = styled("div")(({ bgColor }) => ({
@@ -71,7 +71,7 @@ function Comp() {
 
 > Warning: React does not recognize the `bgColor` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `bgColor` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
 
-위와 같은 경고가 뜬다. 이때, `shouldForwardProp()`이 쓰인다.
+위와 같은 경고가 뜬다. 이때, `shouldForwardProp`이 쓰인다.
 
 ```jsx
 const MyDiv = styled("div", {
@@ -85,17 +85,17 @@ function Comp() {
 }
 ```
 
-이처럼 `styled()`의 두 번째 인자인 옵션 객체에 `shouldForwardProp()`을 추가해서 prop이 `bgColor`일 때는 forward 하지 않게 만들 수 있다.
+이처럼 `styled` 함수의 두 번째 인자인 옵션 객체에 `shouldForwardProp` 메소드를 추가해서 prop이 `bgColor`일 때는 forward 하지 않게 만들 수 있다.
 
 **추가**
 
-이유는 모르겠지만 `styled()`에 첫번째 인자로 `"div"`를 넣으면 어떤 prop을 쓰던 경고가 발생하지 않지만 `Paper`와 같이 JSX를 직접 입력하는 경우 문제가 생긴다.
+이유는 모르겠지만 `styled`에 첫번째 인자로 `"div"`를 넣으면 어떤 prop을 쓰던 경고가 발생하지 않지만 `Paper`와 같이 JSX를 직접 입력하는 경우 문제가 생긴다.
 
 # React.StrictMode
 
 StrictMode 쓰면 렌더링 두 번 된다.
 
-# autoplay in chrome browser
+# Autoplay in Chrome Browser
 
 크롬 브라우저에서는 보안 상의 이유로 소리 있는 영상의 자동 재생을 허용하지 않는다. 크롬 자동 재생 정책은 다음과 같다.
 
@@ -110,7 +110,7 @@ StrictMode 쓰면 렌더링 두 번 된다.
 
 생각해 보니까, 재생 페이지로 들어가기 전에 어차피 사용자 상호작용이 필요하니 빨리 초기 페이지를 만들자
 
-# ref as an instance variable
+# `ref` as an Instance Variable
 
 리액트의 ref는 DOM을 선택하는 용도 외에도 어떤 컴포넌트의 변수로써 활용할 수 있다. state는 값이 변경될 때 마다 컴포넌트를 리렌더링 시키고, 컴포넌트 내에 변수를 직접 선언하면 변수가 계속 초기화 되기 때문에 이 두 가지를 원치 않는 값을 저장할 때 `ref`를 사용할 수 있다.
 
@@ -118,7 +118,7 @@ StrictMode 쓰면 렌더링 두 번 된다.
 
 클래스형 컴포넌트에서는 렌더링이 `render` 함수의 호출로 이루어지기 때문에 `this` 키워드를 이용해 렌더링과 관련 없는 변수를 관리할 수 있는데, 함수형 컴포넌트는 그럴 수 없다. 그래서 나온 게 `useRef` 훅
 
-# ref with React.useCallback()
+# `ref` with React.useCallback()
 
 일반적으로 `React.useRef`를 사용하면 DOM에 ref를 attach/detach 할 때 컴포넌트가 그것을 인지하지 못한다. 그래서 ref를 attach/detach 할 때 어떤 함수를 실행시키고 싶다면 `React.useCallback`을 사용할 수 있다고 한다.
 
@@ -128,7 +128,7 @@ StrictMode 쓰면 렌더링 두 번 된다.
 
 공식 문서의 예시에서는 콜백 함수가 state에 관여하기 때문에 `useCallback`을 쓴 것 같다. 내 상황에서는 Music 컴포넌트가 state를 가지지도 않고 react-player 인스턴스를 `useRef`에 저장하고 있기 때문에 `useCallback` 없이 그냥 함수를 넘겨도 상관 없을 것 같지만 그냥 썼다.
 
-# Nested route and props of `Outlet`
+# Nested Route and Props of `Outlet`
 
 리액트 라우터에는 중첩 라우트 기능이 있다.
 
@@ -213,4 +213,13 @@ function Users() {
 }
 ```
 
-이렇게 하면 `Profile` 컴포넌트를 그대로 사용할 수 있다. 이게 최선인지는 아직 모르겠다.
+이렇게 하면 `Profile` 컴포넌트를 그대로 사용할 수 있다.
+이게 최선인지는 아직 모르겠다.
+
+# Object in Deps Array
+
+`useEffect`, `useCallback`, `useMemo`의 의존성 배열에 객체가 들어간다고 해서 해당 객체를 무조건 메모이징 해주어야 하는 것은 아니다.
+
+객체나 함수가 컴포넌트 내부에서 선언되어 컴포넌트가 렌더링 될 때마다 새로운 참조값을 가지게 될 때에만 신경써주면 된다!
+
+이 프로젝트 곳곳에서 `getCurrentTime`이라는 함수가 props를 통해 자주 전달되곤 하는데, 해당 함수는 `Music` 컴포넌트에서 `useRef`로 관리되어 동일한 참조값을 가지기 때문에 리렌더링에 관해 크게 신경쓰지 않아도 괜찮다.
