@@ -1,9 +1,9 @@
 import { styled } from "@mui/material/styles";
 
-export const LyricContainer = styled("div")(() => ({
+export const LyricContainer = styled("div")({
   marginTop: "10px",
   fontFamily: "'Noto Serif KR', serif",
-}));
+});
 
 export const Line = styled("p")(({ color }) => ({
   color,

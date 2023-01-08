@@ -1,11 +1,11 @@
 import { styled } from "@mui/material/styles";
 import ReactPlayer from "react-player";
 
-const PlayerContainer = styled("div")(() => ({
+const PlayerContainer = styled("div")({
   marginTop: "16px",
   width: "560px",
   height: "315px",
-}));
+});
 
 const config = {
   youtube: {

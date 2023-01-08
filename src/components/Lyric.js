@@ -16,6 +16,8 @@ function Lyric({
     fetch(`/lyrics/${musicName}.lrc`)
       .then((res) => res.text())
       .then(
+        // Bad Code: Encapsulate Conditionals
+        // document임을 확인하는 함수를 만들자
         (text) => (text[0] === "<" ? setLrcLyric("") : setLrcLyric(text)),
         (err) => console.error(err)
       );
