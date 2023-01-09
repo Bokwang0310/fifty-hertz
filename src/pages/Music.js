@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Routes, Route, useParams } from "react-router-dom";
 
 import musicInfo from "../assets/music_info.json";
@@ -30,6 +30,12 @@ function Music() {
     htmlTitle.innerText = `${musicName} - 50Hz`;
   }, [musicName]);
 
+  const changeLyricLine = useCallback((lineIndex) => {
+    setLyricList((prevLyricList) =>
+      prevLyricList.map((lyric, i) => (i === lineIndex ? `✔️ ${lyric}` : lyric))
+    );
+  }, []);
+
   return (
     <Background firstColor={firstColor} secondColor={secondColor}>
       <Player
@@ -45,16 +51,11 @@ function Music() {
           element={
             <Generator
               musicName={musicName}
-              lyricList={lyricList}
+              // 최적화 문제로 state로 관리되는 lyricList를 전달하지 않음
+              lyricList={useMemo(() => lyricText.split("\n"), [lyricText])}
               isPlayerReady={isPlayerReady}
               getCurrentTime={getCurrentTimeRef.current}
-              changeLyricLine={(lineIndex) => {
-                setLyricList((prevLyricList) =>
-                  prevLyricList.map((lyric, i) =>
-                    i === lineIndex ? `✔️ ${lyric}` : lyric
-                  )
-                );
-              }}
+              changeLyricLine={changeLyricLine}
             />
           }
         />
